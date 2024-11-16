@@ -49,6 +49,7 @@ export default function Administrator() {
 
     // modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isADModalOpen, setIsADModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -56,6 +57,13 @@ export default function Administrator() {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+    const openModalAD = () => {
+        setIsADModalOpen(true);
+    };
+
+    const closeModalAD = () => {
+        setIsADModalOpen(false);
     };
     return (
         <div className="w-full 2xl:container 2xl:mx-auto h-auto lg:h-screen overflow-hidden flex-col lg:flex-row flex">
@@ -134,7 +142,7 @@ export default function Administrator() {
                                         <td className="p-4 text-[15px] capitalize">{user?.country}</td>
                                         <td className="p-4">
                                             {/* this is manage button. in this figma i didn't seeing what will open here but i think it must would be dynamic and connected with backend */}
-                                            <button className="bg-[#FFBE00] text-black px-4 py-3 rounded flex justify-center items-center gap-2 text-[15px]">
+                                            <button onClick={openModalAD} className="bg-[#FFBE00] text-black px-4 py-3 rounded flex justify-center items-center gap-2 text-[15px]">
                                                 <AiOutlineControl className="rotate-90 text-black size-[15px] xl:size-[20px]" /> Manage
                                             </button>
                                         </td>
@@ -177,8 +185,10 @@ export default function Administrator() {
                                                         <label htmlFor="level" className="block pb-2 font-semibold">Level</label>
                                                         <select name="status" id="level" className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2">
                                                             <option value="Select">Select</option>
-                                                            <option value="user admin">User Admin</option>
-                                                            <option value="system admin">System Admin</option>
+                                                            <option value="finance">Finance</option>
+                                                            <option value="support">Support</option>
+                                                            <option value="sales">Sales</option>
+                                                            <option value="audit">Audit</option>
                                                         </select>
                                                     </div>
 
@@ -192,6 +202,45 @@ export default function Administrator() {
                                 }
                             />
                         )}
+
+
+                        <AdministratorModal
+                            isOpen={isADModalOpen}
+                            onRequestClose={closeModalAD}
+                            content={
+                                <div className="w-full max-h-[80vh] h-screen sm:max-h-full sm:h-auto overflow-y-auto">
+                                    <div className="bg-white w-full h-auto sm:w-[420px] p-3 rounded-md overflow-y-auto hiddenScroll mx-auto">
+                                        <button className="ms-auto block" onClick={closeModalAD}>
+                                            <AiFillCloseSquare className="size-[20px]" />
+                                        </button>
+                                        <div className="w-full text-center">
+                                            <h4 className="font-semibold text-[20px]">Manage Admin</h4>
+                                            <form className="w-full">
+                                                <div className="py-2 text-start">
+                                                    <label htmlFor="fullName" className="block pb-2 font-semibold">Full Name</label>
+                                                    <input type="text" id="fullName" name="fullName" className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" placeholder="Name" />
+                                                </div>
+                                                <div className="py-2 text-start">
+                                                    <label htmlFor="level" className="block pb-2 font-semibold">Level</label>
+                                                    <select name="status" id="level" className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2">
+                                                        <option value="Select">Select</option>
+                                                        <option value="finance">Finance</option>
+                                                        <option value="support">Support</option>
+                                                        <option value="sales">Sales</option>
+                                                        <option value="audit">Audit</option>
+                                                    </select>
+                                                </div>
+
+                                                <div className="py-2 text-start flex gap-5">
+                                                    <button className="py-3 px-4 rounded-md text-[15px] font-semibold flex justify-center items-center gap-2 bg-[#FFBE00]">Save <FaArrowRight className="size-[15px] text-black" /></button>
+                                                    <button className="py-3 px-4 rounded-md text-[15px] font-semibold flex justify-center items-center gap-2 bg-[#f6464f] text-white">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        />
                     </div>
                 </div>
             </div>

@@ -15,12 +15,12 @@ const LeadsModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, content }) =
             className="fixed inset-0 flex items-center justify-center p-4"
             overlayClassName="fixed inset-0 bg-black bg-opacity-50"
         >
-            <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-lg">
+            <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-lg ">
                 <button
                     onClick={onRequestClose}
-                    className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+                    className="ms-auto block text-gray-600 hover:text-gray-900"
                 >
-                    <MdOutlineClose className='size-[20px] text-white' />
+                    <MdOutlineClose className='size-[20px] text-black' />
                 </button>
                 {content}
             </div>

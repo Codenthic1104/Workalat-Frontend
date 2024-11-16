@@ -4,7 +4,8 @@ import Menus from "../Menus/Menus";
 import { IoFilterSharp, IoReloadOutline } from "react-icons/io5";
 import { useState } from "react";
 import { format } from "date-fns";
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./Leads.css"
@@ -25,6 +26,14 @@ export default function Leads() {
 
     // date time filtering and location filtering
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+    // State to manage calendar view (date, month, or year)
+    const [dateView, setDateView] = useState<'date' | 'month' | 'year'>('date');
+
+    const handleDateChange = (date: Date) => {
+        setSelectedDate(date);
+        setDateView('date'); // Reset to date view after selection
+    };
     const [selectedTime, setSelectedTime] = useState<Date | null>(null);
     const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 

@@ -77,7 +77,7 @@ export default function PointsPage({ data }: any) {
                                     </td>
                                     <td className="p-3">
                                         <div className="flex items-center justify-end">
-                                            <button className="px-2 text-[#FFBE00] sm:text-[16px] text-[12px] font-semibold">
+                                            <button onClick={openModal} className="px-2 text-[#FFBE00] sm:text-[16px] text-[12px] font-semibold">
                                                 Edit
                                             </button>
                                             <button>

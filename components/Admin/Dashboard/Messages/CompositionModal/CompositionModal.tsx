@@ -11,7 +11,7 @@ const CompositionModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, conten
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
-            className="fixed inset-0 flex items-center justify-center p-4"
+            className="fixed inset-0 flex items-center justify-center mt-8 p-4"
             overlayClassName="fixed inset-0 bg-black bg-opacity-50"
         >
             <div className="p-6 rounded-md w-full">

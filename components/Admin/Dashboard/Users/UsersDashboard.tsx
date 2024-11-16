@@ -184,8 +184,8 @@ export default function UsersDashboard() {
                                 isOpen={isModalOpen}
                                 onRequestClose={closeModal}
                                 content={
-                                    <div className="w-full flex-col sm:flex-row max-h-[80vh] h-screen sm:max-h-full sm:h-auto overflow-y-auto flex gap-3 justify-center items-start">
-                                        <div className="bg-white w-full h-screen sm:w-[420px] sm:max-h-[85vh] p-3 rounded-md overflow-y-auto hiddenScroll">
+                                    <div className="w-full flex-col sm:flex-row max-h-[60vh] h-screen sm:max-h-full sm:h-auto overflow-y-auto flex gap-3 justify-center items-start">
+                                        <div className="bg-white w-full h-screen sm:w-[420px] sm:max-h-[65vh] p-3 rounded-md overflow-y-auto hiddenScroll">
                                             <button className="ms-auto block" onClick={closeModal}>
                                                 <AiFillCloseSquare className="size-[20px]" />
                                             </button>
@@ -194,35 +194,35 @@ export default function UsersDashboard() {
                                                 <form className="w-full">
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="fullName" className="block pb-2 font-semibold">Full Name</label>
-                                                        <input type="text" id="fullName" name="fullName" defaultValue={modalData?.userDisplayName} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="fullName" name="fullName" defaultValue={modalData?.userDisplayName} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="userId" className="block pb-2 font-semibold">User ID</label>
-                                                        <input type="text" id="userId" name="userId" defaultValue={modalData?.id} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="userId" name="userId" defaultValue={modalData?.id} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="businessName" className="block pb-2 font-semibold">Business Name</label>
-                                                        <input type="text" id="businessName" name="businessName" defaultValue={modalData?.companyName} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="businessName" name="businessName" defaultValue={modalData?.companyName} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="status" className="block pb-2 font-semibold">User Type</label>
-                                                        <input type="text" id="status" name="status" defaultValue={modalData?.status} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="status" name="status" defaultValue={modalData?.status} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="country" className="block pb-2 font-semibold">Country</label>
-                                                        <input type="text" id="country" name="country" defaultValue={modalData?.country} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="country" name="country" defaultValue={modalData?.country} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="userEmail" className="block pb-2 font-semibold">Email</label>
-                                                        <input type="email" id="userEmail" name="userEmail" defaultValue={modalData?.userEmail} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="email" id="userEmail" name="userEmail" defaultValue={modalData?.userEmail} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="userPhone" className="block pb-2 font-semibold">Phone Number</label>
-                                                        <input type="number" id="userPhone" name="userPhone" defaultValue={modalData?.userPhone} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="number" id="userPhone" name="userPhone" defaultValue={modalData?.userPhone} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                     <div className="py-2 text-start">
                                                         <label htmlFor="registered" className="block pb-2 font-semibold">Registered</label>
-                                                        <input type="text" id="registered" name="registered" defaultValue={modalData?.registered} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
+                                                        <input readOnly type="text" id="registered" name="registered" defaultValue={modalData?.registered} className="w-full ring-[1px] ring-gray-700 rounded-md px-3 py-2" />
                                                     </div>
                                                 </form>
                                             </div>

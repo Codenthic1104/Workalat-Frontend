@@ -22,10 +22,10 @@ const AdminMessageNav = () => {
         >
             <NavbarBrand>
                 <Link href="/" className="flex justify-start items-center gap-1">
-                    <Image alt="WhatWorks" className="w-8 md:w-11" src={logo_dark} />
-                    <span className={clsx("font-semibold font-sans text-white", fontSans.variable)}>
+                    <Image alt="WhatWorks" className="w-24" src={logo_dark} />
+                    {/* <span className={clsx("font-semibold font-sans text-white", fontSans.variable)}>
                         WhatWorks
-                    </span>
+                    </span> */}
                 </Link>
             </NavbarBrand>
         </Navbar>

@@ -18,9 +18,9 @@ const ResponsesModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, content 
             <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-lg">
                 <button
                     onClick={onRequestClose}
-                    className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+                    className="block ms-auto text-gray-600 hover:text-gray-900"
                 >
-                    <MdOutlineClose className='size-[20px] text-white' />
+                    <MdOutlineClose className='size-[20px] text-black' />
                 </button>
                 {content}
             </div>

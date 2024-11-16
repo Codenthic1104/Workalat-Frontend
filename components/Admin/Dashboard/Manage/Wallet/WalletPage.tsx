@@ -61,7 +61,7 @@ export default function WalletPage({ data }: any) {
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center justify-end">
-                                            <button className="px-2 text-[#FFBE00] sm:text-[17px] text-[12px] font-semibold">
+                                            <button onClick={openModal} className="px-2 text-[#FFBE00] sm:text-[17px] text-[12px] font-semibold">
                                                 Edit
                                             </button>
                                             <button>

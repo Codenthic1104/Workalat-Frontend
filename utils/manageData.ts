@@ -178,42 +178,42 @@ export const manageData = [
             {
                 id: 1,
                 point: "5 point",
-                amount: "$ 5"
+                amount: "£ 5"
             },
             {
                 id: 2,
                 point: "10 point",
-                amount: "$ 10"
+                amount: "£ 10"
             },
             {
                 id: 3,
                 point: "15 point",
-                amount: "$ 15"
+                amount: "£ 15"
             },
             {
                 id: 4,
                 point: "20 point",
-                amount: "$ 20"
+                amount: "£ 20"
             },
             {
                 id: 5,
                 point: "25 point",
-                amount: "$ 25"
+                amount: "£ 25"
             },
             {
                 id: 6,
                 point: "30 point",
-                amount: "$ 30"
+                amount: "£ 30"
             },
             {
                 id: 7,
                 point: "35 point",
-                amount: "$ 35"
+                amount: "£ 35"
             },
             {
                 id: 8,
                 point: "40 point",
-                amount: "$ 40"
+                amount: "£ 40"
             }
         ]
     },

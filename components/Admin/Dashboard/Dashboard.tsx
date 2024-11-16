@@ -38,6 +38,29 @@ export default function Dashboard() {
     const professionalData = [20, 40, 35, 45, 55, 50, 60, 10, 76, 20, 70, 30];
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    const [filteredClientData, setFilteredClientData] = useState<number[]>(clientData);
+    const [filteredProfessionalData, setFilteredProfessionalData] = useState<number[]>(professionalData);
+    const [filteredLabels, setFilteredLabels] = useState<string[]>(labels);
+
+    const handleRangeChange = (range: string) => {
+        const rangeMapping: Record<string, [number, number]> = {
+            'jan - march': [0, 2],
+            'april - june': [3, 5],
+            'july - sept': [6, 8],
+            'oct - dec': [9, 11],
+        };
+
+        const [start, end] = rangeMapping[range];
+        setFilteredClientData(clientData.slice(start, end + 1));
+        setFilteredProfessionalData(professionalData.slice(start, end + 1));
+        setFilteredLabels(labels.slice(start, end + 1));
+    };
+
+    const handleYearChange = (year: string) => {
+        // Add logic for year filtering if applicable
+        console.log(`Year selected: ${year}`);
+    };
+
     // the circular data example
     const leadsStatus = {
         thisMonth: {
@@ -91,11 +114,11 @@ export default function Dashboard() {
                 <div className="flex gap-5 justify-between flex-col lg:flex-row">
                     <div className="w-full lg:w-2/3">
                         <div className="bg-white shadow-lg border border-black/10 w-full p-4 rounded-lg">
-                            <ChartHeader />
+                            <ChartHeader onRangeChange={handleRangeChange} onYearChange={handleYearChange} />
                             <LineChart
-                                clientData={clientData}
-                                professionalData={professionalData}
-                                labels={labels}
+                                clientData={filteredClientData}
+                                professionalData={filteredProfessionalData}
+                                labels={filteredLabels}
                             />
                         </div>
 

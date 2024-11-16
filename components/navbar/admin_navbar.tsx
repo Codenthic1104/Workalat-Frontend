@@ -30,36 +30,6 @@ const AdminNavbar = () => {
 
     const avatarDropdownMenu = [
         {
-            key: "dashboard",
-            icon: "/icons/dashboard.png",
-            text: "Dashboard",
-            href: "/client/dashboard"
-        },
-        {
-            key: "projects",
-            icon: businessIcon,
-            text: "My Projects",
-            href: "/my-projects",
-        },
-        {
-            key: "notifications",
-            icon: notificationsIcon,
-            text: "Notifications",
-            href: "/notifications",
-        },
-        {
-            key: "switch",
-            icon: switchIcon,
-            text: `${pathname === "/client/dashboard" || pathname.startsWith("/client/dashboard/") ? "Switch to Seller" : "Switch to Client"}`,
-            href: `${pathname === "/client/dashboard" || pathname.startsWith("/client/dashboard/") ? "/professional/dashboard" : "/client/dashboard"}`,
-        },
-        {
-            key: "settings",
-            icon: settingsIcon,
-            text: "Settings",
-            href: "/settings",
-        },
-        {
             key: "logout",
             icon: logoutIcon,
             text: "Logout",
@@ -74,11 +44,11 @@ const AdminNavbar = () => {
             maxWidth="full"
         >
             <NavbarBrand>
-                <Link href="/" className="flex justify-start items-center gap-1">
-                    <Image width={1000} height={1000} alt="WhatWorks" className="w-8 md:w-11" src={logo_dark} />
-                    <span className={clsx("font-semibold font-sans text-white", fontSans.variable)}>
+                <Link href="/" className="">
+                    <Image width={1000} height={1000} alt="WhatWorks" className="w-24" src={logo_dark} />
+                    {/*<span className={clsx("font-semibold font-sans text-white", fontSans.variable)}>
                         WhatWorks
-                    </span>
+                    </span>*/}
                 </Link>
             </NavbarBrand>
             <NavbarContent as="div" justify="end">

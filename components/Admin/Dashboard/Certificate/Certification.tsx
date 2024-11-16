@@ -144,7 +144,7 @@ export default function Certification() {
                                 isOpen={isModalOpen}
                                 onRequestClose={closeModal}
                                 content={
-                                    <div className="w-full max-h-[80vh] h-screen sm:max-h-full sm:h-auto overflow-y-auto">
+                                    <div className="w-full max-h-[80vh] h-screen sm:max-h-[80vh] sm:h-auto overflow-y-auto hiddenScroll">
                                         <div className="bg-white w-full h-auto sm:w-[520px] p-3 rounded-md overflow-y-auto hiddenScroll mx-auto">
                                             <button className="ms-auto block" onClick={closeModal}>
                                                 <IoCloseCircleOutline className="size-[20px]" />
@@ -174,11 +174,7 @@ export default function Certification() {
                                                             <div className="w-auto flex gap-2">
                                                                 <PiFilesDuotone className="size-[25px] text-black/60" /> <p>{modalData?.uploadedFile?.fileName}</p>
                                                             </div>
-                                                            <select className="border rounded-md outline-none py-1 px-2 border-black/50" name="view" defaultValue={"View"}>
-                                                                <option value="View" disabled>View</option>
-                                                                <option value="Download">Download</option>
-                                                                <option value="Preview">Preview</option>
-                                                            </select>
+                                                            <button className="border rounded-md outline-none py-1 px-2 border-black/50">View</button>
                                                         </div>
                                                     </div>
                                                     <div className="pt-2 pb-1 px-1 w-full">

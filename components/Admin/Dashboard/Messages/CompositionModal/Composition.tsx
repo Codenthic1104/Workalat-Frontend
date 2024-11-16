@@ -54,8 +54,8 @@ export default function Composition({ closeModal, isOpen }: PropsType) {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
                 content={
-                    <div className="w-full max-h-[80vh] flex gap-3 justify-center items-start h-screen sm:max-h-full sm:h-auto overflow-y-scroll hiddenScroll">
-                        <div className="bg-white w-full h-auto md:w-[420px] p-3 rounded-md overflow-y-auto hiddenScroll">
+                    <div className="w-full max-h-[90vh] flex gap-3 justify-center items-start h-screen sm:max-h-[90vh] sm:h-auto overflow-y-scroll hiddenScroll">
+                        <div className="bg-white w-full h-full md:w-[420px] p-3 rounded-md overflow-y-auto hiddenScroll">
                             <button className="ms-auto block" onClick={closeModal}>
                                 <AiFillCloseSquare className="size-[20px]" />
                             </button>

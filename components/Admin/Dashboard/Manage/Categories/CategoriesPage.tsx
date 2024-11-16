@@ -51,6 +51,7 @@ export default function CategoriesPage({ data }: any) {
                                 <td className="p-4">
                                     <div className="flex items-center justify-end">
                                         <button
+                                            onClick={openModal}
                                             className="px-2 text-[#FFBE00] sm:text-[17px] text-[12px] font-semibold"
                                         >
                                             Edit

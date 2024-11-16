@@ -168,14 +168,14 @@ export default function MessageBoxForAll({ data, currentUser }  : any ) {
   return (
       <div className="w-full h-full relative">
           {/* Header */}
-          <div className="w-full flex justify-between bg-[#EDEDED] p-3 rounded-md">
-              <div className="flex items-center">
+          <div className="w-full flex justify-between bg-[#EDEDED] p-3 rounded-md mx-2">
+              <div className="flex items-center mx-2">
                   <img
                       className="w-10 h-10 object-cover object-top rounded-full border shadow"
                       src={data?.user?.data?.avatar}
                       alt=""
                   />
-                  <div className="px-2">
+                  <div className="px-2 mx-2">
                       <p className="text-[17px] text-[#989BA1] font-semibold tracking-wide capitalize">
                           
                       {data?.user?.data?.businessName.length > 0 ? data?.user?.data?.businessName  : data?.user?.data?.username}

@@ -4,6 +4,10 @@ import { reviewsData } from "@/utils/reviewsData";
 import { useEffect, useState } from "react";
 import { MdDelete, MdOutlineStarOutline } from "react-icons/md";
 import Menus from "../Menus/Menus";
+import Link from "next/link";
+import ResponsesModal from "../Responses/ResponsesModal";
+import { GiCheckedShield } from "react-icons/gi";
+import { HiMiniCheckBadge } from "react-icons/hi2";
 
 export default function Reviews() {
     // here reviews will be dynamically from the backend. for now i using "import { reviewsData } from "@/utils/reviewsData";" as a demo review data
@@ -44,6 +48,17 @@ export default function Reviews() {
 
         setFilteredUsers(result);
     }, [userType]);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalData, setIsModalData] = useState({});
+    const openModal = (data: any) => {
+        setIsModalData(data);
+        setIsModalOpen(true);
+    }
+    const closeModal = () => {
+        setIsModalData({});
+        setIsModalOpen(false);
+    }
 
     return (
         <div className="w-full 2xl:container 2xl:mx-auto h-auto lg:h-screen overflow-hidden flex-col lg:flex-row flex bg-slate-100">
@@ -117,7 +132,7 @@ export default function Reviews() {
                                             <img src={user?.userPhoto} alt={user?.userDisplayName} className="w-12 h-12 rounded-full mr-2 object-cover" />
                                         </td>
                                         <td className="p-4">
-                                            <p className="text-[15px] font-semibold capitalize">{user?.firstName} {user?.lastName}</p>
+                                            <button onClick={() => openModal(user)} className="text-[15px] text-nowrap font-semibold bg-transparent capitalize">{user?.firstName} {user?.lastName}</button>
                                         </td>
                                         <td className="p-4">
                                             <p className="text-gray-500 text-[15px] capitalize">{user?.projectTitle}</p>
@@ -132,8 +147,8 @@ export default function Reviews() {
                                         <td className="p-4 text-[15px] capitalize">{user?.userType}</td>
                                         <td className="p-4">
                                             {/* this buttons will be connected with backend for some function or operation */}
-                                            <div className="flex items-center gap-2">
-                                                <button className="text-[17px] text-[#FFBE00] font-semibold">Edit</button>
+                                            <div className="flex items-center justify-center gap-2">
+                                                <button className="text-[#00a770] cursor-pointer" onClick={() => openModal(user)}>View</button>
                                                 <button><MdDelete className="text-[#F52933] cursor-pointer" size={17} /></button>
                                             </div>
                                         </td>
@@ -142,6 +157,43 @@ export default function Reviews() {
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div>
+                    {/* modal */}
+                    {modalData && (
+                        <ResponsesModal
+                            isOpen={isModalOpen}
+                            onRequestClose={closeModal}
+                            content={
+                                <div className="py-3 px-2">
+                                    <div className="flex justify-between pb-2">
+                                        <div className="flex">
+                                            <img className="w-[60px] h-[60px] object-cover" src={modalData?.userPhoto} alt="work alat" />
+
+                                            <div className="px-2">
+                                                <h2 className="capitalize font-semibold text-[15px] flex gap-1 items-center">{modalData?.userDisplayName || `${modalData?.firstName} ${modalData?.lastName}`} <span className="text-sm font-thin lowercase flex gap-0 items-center"><HiMiniCheckBadge className="size-[15px] text-[#29B1FD]" />
+                                                    <GiCheckedShield className="size-[12px] text-[#F76C10]" /></span></h2>
+                                                <p className="text-sm font-semibold capitalize">Project title: {modalData.projectTitle}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-3 overflow-x-hidden overflow-y-scroll hiddenScroll h-[300px]">
+                                        <p>Review: {Array(modalData?.review || 0)
+                                            .fill(0)
+                                            .map((_, index) => (
+                                                <MdOutlineStarOutline key={index} className="inline-block size-[15px] text-black/50" />
+                                            ))}</p>
+
+                                        <label className="block pb-2 font-semibold">Description: </label>
+                                        <p>{modalData?.description}</p>
+                                    </div>
+                                </div>
+                            }
+                        />
+                    )
+                    }
                 </div>
             </div>
         </div>

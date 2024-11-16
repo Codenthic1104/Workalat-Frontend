@@ -202,7 +202,9 @@ export default function Responses() {
                                                                 </div>
 
 
-                                                                <button className="block bg-[#F52933] px-4 text-[12px] font-semibold py-2 rounded-md hover:bg-[#f52933dc] transition-all duration-300 text-white">Declined</button>
+                                                                {
+                                                                    response?.status == "declined" ? <button className="block bg-[#F52933] px-4 text-[12px] font-semibold py-2 rounded-md hover:bg-[#f52933dc] transition-all duration-300 text-white">Declined</button> : response?.status == "pending" ? <button className="block bg-[#ffbe00] px-4 text-[12px] font-semibold py-2 rounded-md hover:bg-[#bf9c34] transition-all duration-300 text-white">Approve</button> : response?.status == "approved" && <button className="block bg-[#00a770] px-4 text-[12px] font-semibold py-2 rounded-md hover:bg-[#34b78c] transition-all duration-300 text-white">Approved</button>
+                                                                }
                                                             </div>
 
                                                             <p className="text-[13px]">{response?.content}</p>

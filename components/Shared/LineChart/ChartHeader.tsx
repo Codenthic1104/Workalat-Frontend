@@ -1,23 +1,45 @@
-'use client'
-import React, { useState } from 'react';
+'use client';
+import React from 'react';
 
-const ChartHeader: React.FC = () => {
-    const [selectedRange, setSelectedRange] = useState('Nov - July');
+interface ChartHeaderProps {
+    onRangeChange: (range: string) => void;
+    onYearChange: (year: string) => void;
+}
+
+const ChartHeader: React.FC<ChartHeaderProps> = ({ onRangeChange, onYearChange }) => {
+    const ranges = ['jan - march', 'april - june', 'july - sept', 'oct - dec'];
+    const years = ['2022', '2023', '2024'];
 
     return (
         <div className="flex justify-between items-center px-4 rounded-xl mb-6">
             {/* Left Section */}
-            <div className="block">
-                <h2 className="text-[15px] font-medium text-black/80 pb-[1px]">Users statistics</h2>
+            <div className="flex items-end">
+                <div className="block">
+                    <h2 className="text-[15px] font-medium text-black/80 pb-[1px]">Users statistics</h2>
+                    <select
+                        className="text-[13px] border-none rounded-md focus:outline-none bg-transparent capitalize text-gray-400"
+                        onChange={(e) => onRangeChange(e.target.value)}
+                    >
+                        {ranges.map((range) => (
+                            <option className='capitalize' key={range} value={range}>
+                                {range}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="block ml-4">
                     <select
                         className="text-[13px] border-none rounded-md focus:outline-none bg-transparent text-gray-400"
-                        value={selectedRange}
-                        onChange={(e) => setSelectedRange(e.target.value)}
+                        onChange={(e) => onYearChange(e.target.value)}
                     >
-                        <option value="Nov - July">Nov - July</option>
-                        <option value="Aug - Dec">Aug - Dec</option>
-                        <option value="Jan - June">Jan - June</option>
+                        {years.map((year) => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
                     </select>
+                </div>
             </div>
 
             {/* Right Section */}
@@ -43,6 +65,5 @@ const ChartHeader: React.FC = () => {
         </div>
     );
 };
-
 
 export default ChartHeader;
