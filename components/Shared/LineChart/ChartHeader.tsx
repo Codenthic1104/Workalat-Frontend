@@ -4,14 +4,20 @@ import React from 'react';
 interface ChartHeaderProps {
     onRangeChange: (range: string) => void;
     onYearChange: (year: string) => void;
+    onWeekChange: (week: string) => void;
 }
 
-const ChartHeader: React.FC<ChartHeaderProps> = ({ onRangeChange, onYearChange }) => {
+const ChartHeader: React.FC<ChartHeaderProps> = ({ onRangeChange, onYearChange, onWeekChange }) => {
     const ranges = ['jan - march', 'april - june', 'july - sept', 'oct - dec'];
     const years = ['2022', '2023', '2024'];
+    const weeks = [
+        'week 1', 'week 2', 'week 3', 'week 4',
+        'week 5', 'week 6', 'week 7', 'week 8',
+        'week 9', 'week 10', 'week 11', 'week 12',
+    ];
 
     return (
-        <div className="flex justify-between items-center px-4 rounded-xl mb-6">
+        <div className="flex justify-between items-start px-4 rounded-xl mb-6">
             {/* Left Section */}
             <div className="flex items-end">
                 <div className="block">
@@ -40,6 +46,19 @@ const ChartHeader: React.FC<ChartHeaderProps> = ({ onRangeChange, onYearChange }
                         ))}
                     </select>
                 </div>
+
+                <div className="block ml-4">
+                    <select
+                        className="text-[13px] border-none rounded-md focus:outline-none bg-transparent text-gray-400"
+                        onChange={(e) => onWeekChange(e.target.value)}
+                    >
+                        {weeks.map((week) => (
+                            <option key={week} value={week}>
+                                {week}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
 
             {/* Right Section */}
@@ -60,6 +79,8 @@ const ChartHeader: React.FC<ChartHeaderProps> = ({ onRangeChange, onYearChange }
                         <span className="text-[10px] text-gray-400 font-semibold">PROFESSIONALS</span>
                     </div>
                     <p className="text-[17px] font-semibold text-gray-800 text-end">782396</p>
+
+                    <button className='bg-yellow-400 px-3 py-1.5 rounded-md font-semibold mt-4 text-sm'>Download</button>
                 </div>
             </div>
         </div>

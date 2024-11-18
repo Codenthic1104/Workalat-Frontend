@@ -8,6 +8,7 @@ import Link from "next/link";
 import { GiCheckedShield } from "react-icons/gi";
 import ActivitiesModal from "./ActivitiesModal";
 import { HiMiniCheckBadge } from "react-icons/hi2";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function Activities() {
     // here users will be dynamically from the backend. for now i using "import { activitiesData } from "@/utils/activitiesData";" as a demo users data
@@ -16,7 +17,9 @@ export default function Activities() {
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const [selectAll, setSelectAll] = useState(false);
     const [userType, setUserType] = useState('all'); // Filter by user type
+    const [dataType, setDataType] = useState('all'); // Filter by data type
     const [filteredUsers, setFilteredUsers] = useState(activitiesData); // Filtered data
+    const [searchTerm, setSearchTerm] = useState(''); // Search term state
 
     // Toggle select all users
     const toggleSelectAll = () => {
@@ -37,7 +40,7 @@ export default function Activities() {
         }
     };
 
-    // Filter users based on selected user type
+    // Filter users based on selected user type, data type, and search term
     useEffect(() => {
         let result = activitiesData;
 
@@ -46,9 +49,24 @@ export default function Activities() {
             result = result.filter((user) => user.userType.toLowerCase() === userType);
         }
 
-        setFilteredUsers(result);
-    }, [userType]);
+        // Filter by data type
+        if (dataType !== 'all') {
+            result = result.filter((user) => user.activity.toLowerCase() === dataType);
+        }
 
+        // Filter by search term
+        if (searchTerm) {
+            result = result.filter((user) =>
+                user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.activity.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.amount.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.invoiceId.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+
+        setFilteredUsers(result);
+    }, [userType, dataType, searchTerm]); // Watch userType, dataType, and searchTerm
 
     const [modalData, setModalData] = useState<any | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,25 +91,54 @@ export default function Activities() {
                 <div className="flex justify-between items-start">
                     <h4 className="text-[20px] font-bold">Activities</h4>
 
-                    <Link className="block bg-[#FFBE00] text-[15px] font-semibold text-black px-4 py-3 rounded-md" href="/admin/activities/membership">
-                        Membership Activity
-                    </Link>
+                    <div className="flex  gap-3 items-center">
+                        <Link className="block bg-[#FFBE00] text-[15px] font-semibold text-black px-4 py-3 rounded-md" href="/admin/activities/membership">
+                            Membership Activity
+                        </Link>
+
+                        <button className='bg-yellow-400 px-5 py-3 rounded-md font-semibold'>Download</button>
+                    </div>
                 </div>
 
                 {/* header */}
                 <div className="flex justify-between items-center pt-5">
                     <h4 className="font-bold text-[20px]">{activitiesData?.length} Records</h4>
                     {/* users type selector */}
-                    <select
-                        name="users"
-                        className="bg-transparent text-[15px] py-2 font-semibold rounded-md px-2 ring-[1px] ring-[#7e7e7e85] outline-none border-none cursor-pointer"
-                        value={userType}
-                        onChange={(e) => setUserType(e.target.value)}
-                    >
-                        <option className="bg-[#07242B] text-white" value="all">All</option>
-                        <option className="bg-[#07242B] text-white" value="client">Client</option>
-                        <option className="bg-[#07242B] text-white" value="professional">Professional</option>
-                    </select>
+                    <div className="flex gap-3">
+                        <div className="flex items-center justify-end">
+                            {/* search box */}
+                            <div className="flex items-center border border-gray-300 rounded-md px-3 py-1.5 w-[250px]">
+                                <AiOutlineSearch className="size-[18px] text-[#909090]" />
+                                <input
+                                    type="search"
+                                    placeholder="Search here"
+                                    className="outline-none bg-transparent ml-2 text-gray-500 placeholder-gray-400 w-full"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+                                />
+                            </div>
+                        </div>
+                        <select
+                            name="users"
+                            className="bg-transparent text-[15px] py-2 font-semibold rounded-md px-2 ring-[1px] ring-[#7e7e7e85] outline-none border-none cursor-pointer"
+                            value={userType}
+                            onChange={(e) => setUserType(e.target.value)}
+                        >
+                            <option className="bg-[#07242B] text-white" value="all">All</option>
+                            <option className="bg-[#07242B] text-white" value="client">Client</option>
+                            <option className="bg-[#07242B] text-white" value="professional">Professional</option>
+                        </select>
+                        <select
+                            name="dataType"
+                            className="bg-transparent text-[15px] py-2 font-semibold rounded-md px-2 ring-[1px] ring-[#7e7e7e85] outline-none border-none cursor-pointer"
+                            value={dataType}
+                            onChange={(e) => setDataType(e.target.value)}
+                        >
+                            <option className="bg-[#07242B] text-white" value="all">All</option>
+                            <option className="bg-[#07242B] text-white" value="lead purchase">Lead Purchase</option>
+                            <option className="bg-[#07242B] text-white" value="wallet top up">Wallet Top Up</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="h-[1px] w-full bg-black mt-5"></div>
                 <div className="py-2">

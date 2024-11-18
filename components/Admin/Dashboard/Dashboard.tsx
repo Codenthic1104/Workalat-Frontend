@@ -61,26 +61,63 @@ export default function Dashboard() {
         console.log(`Year selected: ${year}`);
     };
 
+    const handleWeekChange = (week: string) => {
+        const weekMapping: Record<string, [number, number]> = {
+            'week 1': [0, 0],
+            'week 2': [1, 1],
+            'week 3': [2, 2],
+            'week 4': [3, 3],
+            'week 5': [4, 4],
+            'week 6': [5, 5],
+            'week 7': [6, 6],
+            'week 8': [7, 7],
+            'week 9': [8, 8],
+            'week 10': [9, 9],
+            'week 11': [10, 10],
+            'week 12': [11, 11],
+        };
+
+        const [start, end] = weekMapping[week];
+        setFilteredClientData(clientData.slice(start, end + 1));
+        setFilteredProfessionalData(professionalData.slice(start, end + 1));
+        setFilteredLabels(labels.slice(start, end + 1));
+    };
+
+
     // the circular data example
     const leadsStatus = {
-        thisMonth: {
-            title: "this month",
-            openLead: 50,
-            awarded: 30,
-            rejected: 60
-        },
-        thisYear: {
-            title: "this year",
-            openLead: 300,
-            awarded: 200,
-            rejected: 100
-        },
-    }
+        "Jan-Mar": { openLead: 50, awarded: 30, rejected: 20 },
+        "Apr-Jun": { openLead: 80, awarded: 40, rejected: 30 },
+        "Jul-Sep": { openLead: 70, awarded: 60, rejected: 50 },
+        "Oct-Dec": { openLead: 90, awarded: 80, rejected: 40 },
+        "2023": { openLead: 300, awarded: 200, rejected: 150 },
+        "2022": { openLead: 250, awarded: 180, rejected: 120 },
+        "Week 1": { openLead: 20, awarded: 15, rejected: 10 },
+        "Week 2": { openLead: 25, awarded: 18, rejected: 12 },
+    };
 
-    const [timeFrame, setTimeFrame] = useState<string>("this month");
-    const openLeadData = timeFrame == "this month" ? leadsStatus.thisMonth.openLead : timeFrame == "this year" && leadsStatus.thisYear.openLead;
-    const rejectedLeadData = timeFrame == "this month" ? leadsStatus.thisMonth.rejected : timeFrame == "this year" && leadsStatus.thisYear.rejected;
-    const awardedLeadData = timeFrame == "this month" ? leadsStatus.thisMonth.awarded : timeFrame == "this year" && leadsStatus.thisYear.awarded
+
+    const [rangeType, setRangeType] = useState<"Monthly" | "Yearly" | "Weekly">("Monthly");
+    const [range, setRange] = useState<string>("Jan-Mar");
+
+    const ranges = {
+        Monthly: ["Jan-Mar", "Apr-Jun", "Jul-Sep", "Oct-Dec"],
+        Yearly: ["2023", "2022"],
+        Weekly: ["Week 1", "Week 2"],
+    };
+
+    const handleRangeTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newType = e.target.value as "Monthly" | "Yearly" | "Weekly";
+        setRangeType(newType);
+        setRange(ranges[newType][0]); // Set the first range as default
+    };
+
+    const handleRangeChange2 = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setRange(e.target.value);
+    };
+
+    const chartData = leadsStatus[range];
+
 
     return (
         <div className="w-full 2xl:container 2xl:mx-auto h-auto lg:h-screen overflow-hidden flex-col lg:flex-row flex bg-slate-100">
@@ -114,7 +151,11 @@ export default function Dashboard() {
                 <div className="flex gap-5 justify-between flex-col lg:flex-row">
                     <div className="w-full lg:w-2/3">
                         <div className="bg-white shadow-lg border border-black/10 w-full p-4 rounded-lg">
-                            <ChartHeader onRangeChange={handleRangeChange} onYearChange={handleYearChange} />
+                            <ChartHeader
+                                onRangeChange={handleRangeChange}
+                                onYearChange={handleYearChange}
+                                onWeekChange={handleWeekChange}
+                            />
                             <LineChart
                                 clientData={filteredClientData}
                                 professionalData={filteredProfessionalData}
@@ -138,14 +179,17 @@ export default function Dashboard() {
                     </div>
                     <div className="w-full lg:w-1/3">
                         <div className="w-full">
-                            {/* this chart also will be dynamic */}
+                            {/* Circle Chart */}
                             <CircleChart
-                                openLeads={openLeadData}
-                                awardedLeads={awardedLeadData}
-                                rejectedLeads={rejectedLeadData}
-                                title="Leads Status"
-                                timeframe={timeFrame}
-                                setTimeFrame={setTimeFrame}
+                                openLeads={chartData.openLead}
+                                awardedLeads={chartData.awarded}
+                                rejectedLeads={chartData.rejected}
+                                title={`Leads Status (${range})`}
+                                handleRangeChange2={handleRangeChange2}
+                                rangeType={rangeType}
+                                handleRangeTypeChange={handleRangeTypeChange}
+                                range={range}
+                                ranges={ranges}
                             />
                         </div>
                     </div>
